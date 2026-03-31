@@ -1,0 +1,110 @@
+[
+    {
+        "label": "Everyday Essentials",
+        "icon": "/approve/services/service-1.png",
+        "lists": [
+            {
+                "text": "Errand coordination"
+            },
+            {
+                "text": "Appointment & schedule management"
+            },
+            {
+                "text": "'Find this for me' product sourcing"
+            },
+            {
+                "text": "Reminders & life-admin support"
+            }
+        ]
+    },
+    {
+        "label": "Lifestyle & Dining",
+        "icon": "/approve/services/service-2.png",
+        "lists": [
+            {
+                "text": "Restaurant recommendations & reservations"
+            },
+            {
+                "text": "Date-night & special-occasion planning"
+            },
+            {
+                "text": "Wellness, beauty & fitness bookings"
+            },
+            {
+                "text": "Event and experience curation"
+            }
+        ]
+    },
+    {
+        "label": "Family Support",
+        "icon": "/approve/services/service-3.png",
+        "lists": [
+            {
+                "text": "Kid-friendly travel planning"
+            },
+            {
+                "text": "Local experience recommendations for families"
+            },
+            {
+                "text": "School break, holiday & activity planning"
+            },
+            {
+                "text": "Childcare, classes & camp research"
+            }
+        ]
+    },
+    {
+        "label": "Travel & Experiences",
+        "icon": "/approve/services/service-4.png",
+        "lists": [
+            {
+                "text": "Full itinerary planning"
+            },
+            {
+                "text": "Hotel, villa & resort curation"
+            },
+            {
+                "text": "Flight tracking + rebooking assistance"
+            },
+            {
+                "text": "Travel with baby: cribs, strollers, childcare."
+            }
+        ]
+    },
+    {
+        "label": "Home Management",
+        "icon": "/approve/services/service-5.png",
+        "lists": [
+            {
+                "text": "Moving & relocation coordination"
+            },
+            {
+                "text": "Book home services: cleaning, repairs."
+            },
+            {
+                "text": "Contractor/vendor recommendations"
+            },
+            {
+                "text": "Household setup & seasonal planning"
+            }
+        ]
+    },
+    {
+        "label": "Personal Shopping",
+        "icon": "/approve/services/service-6.png",
+        "lists": [
+            {
+                "text": "Gift sourcing for any occasion"
+            },
+            {
+                "text": "Personal shopping & style guidance"
+            },
+            {
+                "text": "Hard-to-find item research"
+            },
+            {
+                "text": "Returns, exchanges & comparison shopping"
+            }
+        ]
+    }
+]

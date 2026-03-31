@@ -1,0 +1,109 @@
+import Link from "next/link";
+import Header from "@/components/header";
+import FooterSection from "@/components/approved-lux/footer-section";
+
+type ThankYouPageProps = {
+  searchParams: Promise<
+    Record<string, string | string[] | undefined>
+  >;
+};
+
+function getParam(
+  value: string | string[] | undefined,
+  fallback: string
+): string {
+  if (Array.isArray(value)) return value[0] ?? fallback;
+  return value ?? fallback;
+}
+
+export default async function ThankYouPage({ searchParams }: ThankYouPageProps) {
+  const params = await searchParams;
+
+  const paymentType = getParam(params.paymentType, "Master Card");
+  const email = getParam(params.email, "example@gmail.com");
+  const transactionId = getParam(params.transactionId, "VCC9987441997");
+  const amountRaw = getParam(params.amount, "449.98");
+  const amount = Number.parseFloat(amountRaw);
+
+  return (
+    <div className="min-h-screen bg-[#f9f9f9]">
+      <Header />
+      <main className="px-4 py-10 sm:py-14">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-4 lg:grid-cols-[1.8fr_1fr] items-start">
+            <section className="rounded-xl border border-[#DDEAFF] px-4 py-8 text-center sm:px-8 bg-white">
+              <div
+                className="mx-auto inline-flex h-[72px] w-[72px] items-center justify-center"
+                aria-label="Payment success"
+              >
+
+<svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M45 4.6875C42.8962 4.6875 41.1826 5.57251 39.6226 6.76501C38.1601 7.87876 36.5476 9.49119 34.6613 11.3774L34.53 11.5087C32.5988 13.44 30.915 14.1974 28.32 14.1974C27.9938 14.1974 27.5849 14.1862 27.1199 14.1749C25.9312 14.1412 24.3937 14.0962 23.0475 14.2125C21.0787 14.385 18.6187 14.9213 16.7512 16.8038C14.8987 18.675 14.3738 21.1238 14.2088 23.0775C14.0963 24.4125 14.1412 25.9387 14.1749 27.1199C14.1862 27.5849 14.1974 27.9938 14.1974 28.32C14.1974 30.915 13.44 32.5988 11.5087 34.53L11.3774 34.6613C9.49119 36.5476 7.87876 38.1601 6.76501 39.6226C5.57251 41.1826 4.6875 42.8962 4.6875 45C4.6875 47.1038 5.57251 48.8174 6.76501 50.3774C7.87876 51.8399 9.49119 53.4524 11.3774 55.3387L11.5087 55.47C12.7612 56.7225 13.3501 57.5325 13.6838 58.2975C14.0101 59.0437 14.1974 59.9887 14.1974 61.68C14.1974 62.0062 14.1862 62.4151 14.1749 62.8801C14.1412 64.0688 14.0962 65.6063 14.2125 66.9525C14.385 68.9213 14.9213 71.3813 16.8038 73.2488C18.675 75.1013 21.1238 75.6262 23.0775 75.7912C24.4125 75.9037 25.9387 75.8588 27.1199 75.8251C27.5849 75.8138 27.9938 75.8026 28.32 75.8026C29.9738 75.8026 30.9037 75.9676 31.6349 76.2713C32.3662 76.5713 33.15 77.1113 34.3275 78.2888C34.5788 78.54 34.9125 78.8963 35.295 79.3088C36.1575 80.2313 37.2788 81.4313 38.3251 82.35C39.9151 83.7375 42.195 85.3125 45 85.3125C47.805 85.3125 50.0849 83.7375 51.6749 82.35C52.7212 81.4313 53.8425 80.2313 54.705 79.3088C55.0875 78.8963 55.4212 78.54 55.6725 78.2888C56.85 77.1113 57.6338 76.5713 58.3651 76.2713C59.0963 75.9676 60.0262 75.8026 61.68 75.8026C62.0062 75.8026 62.4151 75.8138 62.8801 75.8251C64.0613 75.8588 65.5875 75.9037 66.9225 75.7912C68.8762 75.6262 71.325 75.1013 73.1962 73.2488C75.0787 71.3813 75.615 68.9213 75.7875 66.9525C75.9038 65.6063 75.8588 64.0688 75.8251 62.8801C75.8138 62.4151 75.8026 62.0025 75.8026 61.68C75.8026 59.9887 75.9899 59.0437 76.3162 58.2975C76.6499 57.5325 77.2388 56.7225 78.4913 55.47L78.6226 55.3387C80.5088 53.4524 82.1212 51.8399 83.235 50.3774C84.4275 48.8174 85.3125 47.1038 85.3125 45C85.3125 42.8962 84.4275 41.1826 83.235 39.6226C82.1212 38.1601 80.5088 36.5476 78.6226 34.6613L78.4913 34.53C77.2388 33.2775 76.6499 32.4675 76.3162 31.7025C75.9899 30.9563 75.8026 30.0113 75.8026 28.32C75.8026 27.9938 75.8138 27.585 75.8251 27.1238C75.8588 25.9313 75.9038 24.3937 75.7875 23.0475C75.615 21.0787 75.0787 18.6187 73.1962 16.7512C71.325 14.8987 68.8762 14.3738 66.9225 14.2088C65.5875 14.0963 64.0613 14.1412 62.8801 14.1749C62.4151 14.1862 62.0025 14.1974 61.68 14.1974C59.0812 14.1974 57.4012 13.44 55.47 11.5087L55.3387 11.3774C53.4524 9.49119 51.8399 7.87876 50.3774 6.76501C48.8174 5.57251 47.1038 4.6875 45 4.6875ZM57.9825 38.9513C59.82 37.995 60.5325 35.73 59.5763 33.8925C58.62 32.055 56.355 31.3425 54.5175 32.2987C49.1625 35.0887 44.7937 40.4287 41.9062 44.6362C41.0925 45.8249 40.3725 46.9613 39.75 47.9888C39.3263 47.6288 38.9138 47.3062 38.5388 47.025C37.7288 46.4137 37.0049 45.9374 36.4724 45.6037L35.5463 45.0562H35.5388C33.72 44.0662 31.4437 44.7376 30.4537 46.5601C29.4675 48.3788 30.1425 50.6551 31.9612 51.6451C32.5012 51.9863 33.6676 52.7363 34.0276 53.0138C35.2763 53.955 36.5512 55.1399 37.3237 56.3699C38.0512 57.5249 39.3487 58.1963 40.7137 58.1213C42.0749 58.0426 43.29 57.2288 43.8825 55.9988C44.0738 55.6125 44.5613 54.6563 44.9738 53.9288C45.7051 52.6125 46.77 50.8124 48.0938 48.8774C50.8313 44.8874 54.3375 40.8488 57.9825 38.9513Z" fill="#30B526"/>
+</svg>
+
+              </div>
+              <h1 className="mt-6 text-3xl font-semibold text-[#0E0E0F] sm:text-4xl">
+                Welcome to Approved Experiences.
+              </h1>
+              <p className="mx-auto mt-4 max-w-2xl text-base text-[#525253] sm:text-lg">
+                You will receive a confirmation email within the next 12 hours
+                with your login credentials. Once received, please login. If you
+                do not receive the confirmation email, please contact us at{" "}
+                <a
+                  href="mailto:support@approvedexperiences.com"
+                  className="underline"
+                >
+                  support@approvedexperiences.com
+                </a>
+                .
+              </p>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+                <Link
+                  href="/traveler/login"
+                  className="rounded-full bg-[#001F63] px-8 py-2.5 text-sm font-semibold text-white hover:bg-[#00174B] transition-colors"
+                >
+                  Log In
+                </Link>
+                <Link
+                  href="/approved-lux"
+                  className="text-sm font-semibold underline underline-offset-4"
+                >
+                  Back to Home
+                </Link>
+              </div>
+            </section>
+
+            <aside className="rounded-xl border border-[#DDEAFF] p-4 sm:p-6 bg-white">
+              <dl className="space-y-5 text-sm sm:text-base">
+                <div className="flex items-center justify-between gap-4">
+                  <dt className="text-[#525253]">Payment Type</dt>
+                  <dd className="font-semibold text-[#0E0E0F]">{paymentType}</dd>
+                </div>
+                <div className="flex items-center justify-between gap-4">
+                  <dt className="text-[#525253]">Email Address</dt>
+                  <dd className="font-semibold text-[#0E0E0F] break-all text-right">
+                    {email}
+                  </dd>
+                </div>
+                <div className="h-px bg-[#E6EEFF]" />
+                <div className="flex items-center justify-between gap-4">
+                  <dt className="text-[#525253]">Amount Paid</dt>
+                  <dd className="font-semibold text-[#0E0E0F]">
+                    US${Number.isFinite(amount) ? amount.toFixed(2) : "449.98"}
+                  </dd>
+                </div>
+                <div className="flex items-center justify-between gap-4">
+                  <dt className="text-[#525253]">Transaction id</dt>
+                  <dd className="font-semibold text-[#0E0E0F] break-all text-right">
+                    {transactionId}
+                  </dd>
+                </div>
+              </dl>
+            </aside>
+          </div>
+        </div>
+      </main>
+      <FooterSection />
+    </div>
+  );
+}
