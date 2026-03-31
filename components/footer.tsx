@@ -28,8 +28,8 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="px-4 text-white relative">
-      <div className="bg-[#001F63] container mx-auto px-6 sm:px-8 rounded-t-[40px] pt-10 sm:pt-12">
+    <footer className="text-white relative">
+      <div className="bg-[#001F63] mx-auto px-6 sm:px-8 rounded-t-[40px] pt-10 sm:pt-12">
         <div className="bg-[#E9F0FF] text-gray-900 rounded-2xl p-6 sm:p-8 md:p-12 mb-16 sm:mb-20">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
             <div>

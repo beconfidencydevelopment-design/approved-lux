@@ -29,7 +29,7 @@ export default function HeroSection() {
               US-Based Personal Assistants
             </div>
 
-            <h1 className="mt-4 text-[40px] leading-[48px] lg:text-[64px] lg:leading-[72px] font-semibold text-[#001F63]">
+            <h1 className="mt-4 text-[40px] leading-[48px] lg:text-[64px] lg:leading-[68px] font-semibold text-[#001F63]">
             The{" "}
               <span className="bg-gradient-to-r from-[#3149FA] to-[#8E98FE] bg-clip-text text-transparent pr-1">
               Travel Membership 
