@@ -6,37 +6,24 @@ declare global {
   }
 }
 import Script from "next/script";
-import ClientWrapper from "@/app/ClientWrapper";
-import ClientsSection from "@/components/clients-section";
-import ContactSection from "@/components/contact-section";
-import FeaturedSection from "@/components/featured-section";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
-import HeroSection from "@/components/hero-section";
-import PartnersSection from "@/components/partners-section";
-import PlatformSection from "@/components/platform-section";
-import PricingSection from "@/components/pricing-section";
-import RewardCreditsSection from "@/components/reward-credits-section";
-import SavingsSection from "@/components/savings-section";
-import ScrollToTop from "@/components/scroll-to-top";
-import StatsSection from "@/components/stats-section";
-import TrustedSection from "@/components/trusted-section";
-import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import {
-  useGetMembershipPlansQuery,
-} from "../redux/services/api";
+import HeroSection from "@/components/traveler-v2/hero-section";
+import RevealTextSection from "@/components/traveler-v2/reveal-text-section";
+import WhatWeHandleSection from "@/components/traveler-v2/what-we-handle-section";
+import FeaturedInSection from "@/components/traveler-v2/featured-in-section";
+import ReviewSection from "@/components/traveler-v2/review-section";
+import StrugglesSection from "@/components/traveler-v2/struggles-section";
+import HowWeHelpSection from "@/components/traveler-v2/how-we-help-section";
+import PricingSection from "@/components/traveler-v2/pricing-section";
+import FaqSection from "@/components/traveler-v2/faq-section";
+import CtaSection from "@/components/traveler-v2/cta-section";
+import { useEffect, useState } from "react";
+import { useGetMembershipPlansQuery } from "../redux/services/api";
 import { useFacebookPixel } from "@/redux/hooks/use-facebook-pixel";
 import Banner from "@/components/banner";
 export default function Home() {
-  const {
-    data: membershipPlans,
-    error: membershipError,
-    isLoading: membershipIsLoading,
-    isSuccess: membershipIsError,
-    isError: membershipisError,
-    refetch: membershipRefetch,
-  } = useGetMembershipPlansQuery(undefined);
+  useGetMembershipPlansQuery(undefined);
 
   const [bannerVisible, setBannerVisible] = useState(false);
 
@@ -82,32 +69,20 @@ export default function Home() {
       {/* Header and Hero are siblings */}
 
       <Header />
+      <main>
       <HeroSection />
-
-
-      {/* Top section content */}
-      <StatsSection />
-      <PlatformSection />
-      <PartnersSection />
-      {/* <SocialSection /> */}
-      
-      {/* Middle section content */}
-      <RewardCreditsSection />
-      <FeaturedSection />
-      <div id="how-it-works">
-      <SavingsSection />
-      </div>
-      <TrustedSection />
-
-      {/* Bottom section content */}
-      <ClientWrapper>
-      <ClientsSection />
-      </ClientWrapper>
-      <PricingSection data={membershipPlans?.data} />
-      <ContactSection />
+      <RevealTextSection />
+      <WhatWeHandleSection />
+      <ReviewSection />
+      <FeaturedInSection />
+      <StrugglesSection />
+      <HowWeHelpSection />
+      <CtaSection />
+      <PricingSection />
+      <FaqSection />
+      </main>
 
       <Footer />
-      <ScrollToTop />
     </div>
   );
 }

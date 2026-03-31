@@ -25,7 +25,7 @@ const logos = [
 const stats = [
   {
     value: 1100,
-    suffix: "K+",
+    suffix: "+",
     label: "Private Jet Charters",
   },
   {
