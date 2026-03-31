@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { RevealWord } from "./shared/reveal-word";
 import { cn } from "@/lib/utils";
 
 const helps = [
@@ -43,23 +42,14 @@ const helps = [
 ];
 
 export default function HowWeHelpSection() {
-  const textRevealRef = useRef<HTMLDivElement | null>(null);
   const desktopCardsRef = useRef<HTMLDivElement | null>(null);
-
-  const { scrollYProgress: textScrollYProgress } = useScroll({
-    target: textRevealRef,
-    offset: ["start 0.85", "end 0.2"],
-  });
 
   const { scrollYProgress: cardsScrollYProgress } = useScroll({
     target: desktopCardsRef,
     offset: ["start 75%", "end 35%"],
   });
 
-  const text =
-    "When you book travel through public platforms like Expedia or Hotels.com, you are seeing retail pricing.";
-
-  const words = text.split(" ");
+  
 
   return (
     <section className="py-10 lg:py-24 bg-white">
@@ -69,22 +59,9 @@ export default function HowWeHelpSection() {
           <h1 className="font-semibold text-center text-[#001F63] text-[32px] leading-[40px] lg:text-[48px]">
             Travelers Often Overpay For Trips.
           </h1>
-          <div ref={textRevealRef} className="px-4">
-            <p className="mx-auto max-w-4xl text-center text-[28px] leading-[36px] lg:text-[36px] lg:leading-[44px]">
-              {words.map((word, index) => {
-                const start = index / words.length;
-                const end = start + 1 / words.length;
-
-                return (
-                  <RevealWord
-                    key={`${word}-${index}`}
-                    progress={textScrollYProgress}
-                    range={[start, end]}
-                  >
-                    {word}
-                  </RevealWord>
-                );
-              })}
+          <div className="px-4">
+            <p className="text-[#525253] text-lg lg:text-xl text-center">
+            When you book travel through public platforms like Expedia <br /> or Hotels.com, you are seeing retail pricing.
             </p>
           </div>
         </div>
@@ -150,16 +127,10 @@ const CardContent = ({ h, idx }: { h: any; idx: number }) => (
       <div
         className={cn(
           "w-fit px-4 py-2 rounded-full bg-[#30B526]/10 text-[#30B526] flex items-center gap-2",
-          {
-            "text-white bg-[#30B526]": idx == 3,
-          },
+
         )}
       >
-        <span
-          className={cn("size-2.5 rounded-full bg-[#30B526]", {
-            "bg-white": idx == 3,
-          })}
-        />
+        <span className={cn("size-2.5 rounded-full bg-[#30B526]")} />
         <p className="text-sm">{h.tag}</p>
       </div>
 
