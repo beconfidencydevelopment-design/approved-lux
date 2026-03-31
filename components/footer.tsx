@@ -125,7 +125,7 @@ export default function Footer() {
               <h4 className="font-bold text-lg">Navigation</h4>
               <ul className="mt-4 space-y-3 text-[#C8D4F5]">
                 <li>
-                  <Link href="/traveler" className="hover:text-white transition">
+                  <Link href="/traveler-v2" className="hover:text-white transition">
                     Traveler 2.0
                   </Link>
                 </li>
@@ -177,7 +177,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/approvedlux"
+                    href="/approved-lux"
                     className="hover:text-white transition"
                   >
                     Case Studies

@@ -246,7 +246,7 @@ export default function Header() {
       <header className="left-0 w-full bg-white z-50">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex items-center justify-between">
-            <Link href="/traveler" className="flex items-center">
+            <Link href="/" className="flex items-center">
               <Image
                 src="/ApprovedOriginal.png"
                 alt="Approved Experiences Logo"
