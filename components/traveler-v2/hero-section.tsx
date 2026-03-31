@@ -1,8 +1,112 @@
-const VD_URL = "https://pub-0629005fcfb44f7ca99f4fbb3b9937c3.r2.dev/2327415_British_Virgin_1920x1080.mp4";
+"use client";
+
+import { Check } from "lucide-react";
+import { useEffect, useState } from "react";
+import Banner from "@/components/banner";
+
+const VD_URL =
+  "https://pub-0629005fcfb44f7ca99f4fbb3b9937c3.r2.dev/2327415_British_Virgin_1920x1080.mp4";
+
+const firstnames = [
+  "James",
+  "Michael",
+  "Sarah",
+  "Emily",
+  "David",
+  "Olivia",
+  "Daniel",
+];
+
+const lastnames = ["Smith", "Johnson", "Brown", "Williams", "Jones", "Taylor"];
+
+const cities = [
+  "Miami, FL",
+  "Los Angeles, CA",
+  "New York, NY",
+  "Chicago, IL",
+  "Austin, TX",
+  "Seattle, WA",
+];
+
+// Small "user just joined" toast (same UI as the homepage hero popup).
+const UserJustJoined = ({
+  className,
+  name,
+  location,
+}: {
+  className?: string;
+  name: string;
+  location: string;
+}) => (
+  <div
+    className={`bg-white px-4 py-2 rounded-2xl w-max border border-[#2563EB] ${
+      className ?? ""
+    }`}
+  >
+    <div className="flex items-center gap-2">
+      <p className="font-semibold text-black text-sm">{name} just joined!</p>
+      <div className="bg-[#2563EB] rounded-full p-0.5">
+        <Check className="w-3 h-3 text-white" />
+      </div>
+    </div>
+    <p className="text-black/80 text-xs mt-1">{location}</p>
+  </div>
+);
 
 export default function HeroSection() {
+  const [bannerVisible, setBannerVisible] = useState(false);
+  const [currentUser, setCurrentUser] = useState(() => {
+    const randomFirstName =
+      firstnames[Math.floor(Math.random() * firstnames.length)];
+    const randomLastName =
+      lastnames[Math.floor(Math.random() * lastnames.length)];
+    const randomCity = cities[Math.floor(Math.random() * cities.length)];
+
+    return {
+      fullName: `${randomFirstName} ${randomLastName}`,
+      location: randomCity,
+    };
+  });
+  const [showNotification, setShowNotification] = useState(false);
+
+  // Mirror the homepage popup behavior: show after a short delay.
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setBannerVisible(true);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const randomFirstName =
+        firstnames[Math.floor(Math.random() * firstnames.length)];
+      const randomLastName =
+        lastnames[Math.floor(Math.random() * lastnames.length)];
+      const randomCity = cities[Math.floor(Math.random() * cities.length)];
+
+      setCurrentUser({
+        fullName: `${randomFirstName} ${randomLastName}`,
+        location: randomCity,
+      });
+      setShowNotification(true);
+
+      const hideTimeout = setTimeout(() => {
+        setShowNotification(false);
+      }, 5000);
+
+      return () => clearTimeout(hideTimeout);
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="pb-[100px]">
+      <Banner
+        isVisible={bannerVisible}
+        onClose={() => setBannerVisible(false)}
+      />
       <div className="relative w-full pt-[300px] lg:pt-[500px] bg-cover bg-center px-4 lg:px-0 overflow-hidden">
         <video
           className="absolute inset-0 w-full h-full object-cover"
@@ -44,6 +148,15 @@ Unlocks Insider Pricing
           </div>
         </div>
       </div>
+
+      {/* Notification */}
+      {showNotification && (
+        <UserJustJoined
+          name={currentUser.fullName}
+          location={currentUser.location}
+          className="fixed bottom-24 md:bottom-5 right-4 md:right-25 z-50"
+        />
+      )}
     </section>
   );
 }
