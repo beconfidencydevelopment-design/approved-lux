@@ -1,157 +1,226 @@
+"use client";
+
 import Link from "next/link";
 import { Check, Plus } from "lucide-react";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+
+type PlanId = "gold" | "platinum" | "diamond";
+
+const TABS: { id: PlanId; label: string }[] = [
+  { id: "gold", label: "Gold" },
+  { id: "platinum", label: "Platinum" },
+  { id: "diamond", label: "Diamond" },
+];
 
 export default function PricingSection() {
+  const [activePlan, setActivePlan] = useState<PlanId>("platinum");
+
+  const planCardClass = (id: PlanId) =>
+    cn(
+      "h-full rounded-2xl border border-[#D8E6FF] bg-white p-4",
+      activePlan === id ? "flex flex-col" : "hidden lg:flex lg:flex-col",
+    );
+
   return (
     <section id="pricing-section" className="py-10 lg:py-[70px]">
       <div className="mx-auto w-full max-w-7xl px-4">
-        <div className="grid gap-4 lg:grid-cols-3">
-          {/* Gold */}
-          <article className="flex h-full flex-col rounded-2xl border border-[#D8E6FF] bg-white p-4">
-            <h3 className="text-[40px] leading-[48px] font-semibold text-[#001F63]">Gold</h3>
-            <div className="mt-4 flex flex-1 flex-col rounded-2xl bg-[#F7FAFF] p-5">
-              <p className="text-[24px] leading-[32px] text-[#525253]">
-                Unlock benefits that include
-              </p>
-              <ul className="mt-5 space-y-3 text-[20px] leading-[28px] text-[#3E424B]">
-                <FeatureRow label="Hotels" />
-                <FeatureRow label="Cruises" />
-                <FeatureRow label="Car Rentals" />
-                <FeatureRow label="Flights" />
-                <FeatureRow label="Villas & Luxury Homes" />
-                <FeatureRow label="Reward Credits" />
-                <FeatureRow label="Value Guarantee" />
-              </ul>
+        <div className="mb-10 space-y-5">
+          <h1 className="text-center text-[32px] font-semibold leading-[40px] text-[#001F63] lg:text-[48px] lg:leading-[120%]">
+            Pricing Plans
+          </h1>
+          <p className="mx-auto max-w-md text-center text-[#525253]">
+            Effortless living for you or your circle. Our plans provide seamless travel and
+            stress-free management.
+          </p>
+        </div>
 
-              <div className="mt-auto pt-8">
-                <div className="rounded-2xl border border-[#E6EEFF] bg-white p-5">
-                  <div className="flex items-end gap-2">
-                    <span className="text-[48px] leading-[56px] font-semibold text-[#0E0E0F]">
-                      $699
-                    </span>
-                    <span className="pb-2 text-[26px] leading-[34px] text-[#7A7E87] line-through">
-                      $799
-                    </span>
-                    <span className="pb-2 text-[20px] leading-[28px] text-[#525253]">
-                      / year
-                    </span>
-                  </div>
-                  <Link
-                    href="/traveler/checkout?planId=1"
-                    className="mt-4 block w-full rounded-full bg-[#001F63] py-3 text-center text-[22px] leading-[30px] font-medium text-white transition-colors hover:bg-[#00174B]"
-                  >
-                    Get Started
-                  </Link>
-                  <div className="mt-3 flex items-center justify-center gap-2 text-[16px] leading-[24px] text-[#525253]">
-                    <ShieldIcon />
-                    <span>60 Days Money Back Guarantee</span>
+        <div className="space-y-4 lg:space-y-0">
+          <div
+            className="flex gap-1 rounded-2xl border border-[#D8E6FF] bg-white p-1 lg:hidden"
+            role="tablist"
+            aria-label="Pricing plans"
+          >
+            {TABS.map((tab) => {
+              const selected = activePlan === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={selected}
+                  onClick={() => setActivePlan(tab.id)}
+                  className={cn(
+                    "flex-1 rounded-xl py-2.5 text-center text-sm font-semibold transition-colors",
+                    selected
+                      ? "bg-[#E8F0FF] text-[#2563EB]"
+                      : "text-[#001F63] hover:bg-[#F7FAFF]",
+                  )}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-3">
+            {/* Gold */}
+            <article className={planCardClass("gold")}>
+              <h3 className="text-[32px] font-semibold leading-[40px] text-[#001F63] sm:text-[40px] sm:leading-[48px]">
+                Gold
+              </h3>
+              <div className="mt-4 flex flex-1 flex-col rounded-2xl bg-[#F7FAFF] p-5">
+                <p className="text-[18px] leading-[26px] text-[#525253] sm:text-[20px] sm:leading-[28px]">
+                  Unlock benefits that include
+                </p>
+                <ul className="mt-5 space-y-3 text-[16px] leading-[24px] text-[#3E424B] sm:text-[18px] sm:leading-[26px]">
+                  <FeatureRow label="Hotels" />
+                  <FeatureRow label="Cruises" />
+                  <FeatureRow label="Car Rentals" />
+                  <FeatureRow label="Flights" />
+                  <FeatureRow label="Villas & Luxury Homes" />
+                  <FeatureRow label="Reward Credits" />
+                  <FeatureRow label="Value Guarantee" />
+                </ul>
+
+                <div className="mt-auto pt-8">
+                  <div className="rounded-2xl border border-[#E6EEFF] bg-white p-5">
+                    <div className="flex items-end gap-2">
+                      <span className="text-[40px] font-semibold leading-[48px] text-[#0E0E0F] sm:text-[48px] sm:leading-[56px]">
+                        $699
+                      </span>
+                      <span className="pb-2 text-[22px] leading-[30px] text-[#7A7E87] line-through sm:text-[26px] sm:leading-[34px]">
+                        $799
+                      </span>
+                      <span className="pb-2 text-[18px] leading-[26px] text-[#525253] sm:text-[20px] sm:leading-[28px]">
+                        / year
+                      </span>
+                    </div>
+                    <Link
+                      href="/traveler/checkout?planId=4"
+                      className="mt-4 block w-full rounded-full bg-[#001F63] py-3 text-center text-[20px] font-medium leading-[28px] text-white transition-colors hover:bg-[#00174B] sm:text-[22px] sm:leading-[30px]"
+                    >
+                      Get Started
+                    </Link>
+                    <div className="mt-3 flex items-center justify-center gap-2 text-[14px] leading-[22px] text-[#525253] sm:text-[16px] sm:leading-[24px]">
+                      <ShieldIcon />
+                      <span>60 Days Money Back Guarantee</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          {/* Platinum */}
-          <article className="flex h-full flex-col rounded-2xl border border-[#D8E6FF] bg-white p-4">
-            <h3 className="text-[40px] leading-[48px] font-semibold text-[#001F63]">Platinum</h3>
-            <div
-              className="mt-4 flex flex-1 flex-col rounded-2xl p-5 text-white"
-              style={{
-                backgroundImage: "url('/traveler/pricing-bg.png')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              <p className="text-[24px] leading-[32px] text-white/95">
-                Premium luxury travel experience with the best value.
-              </p>
-              <ul className="mt-5 space-y-3 text-[20px] leading-[28px] text-white">
-                <FeatureRow label="Hotels" light />
-                <FeatureRow label="Cruises" light />
-                <FeatureRow label="Car Rentals" light />
-                <FeatureRow label="Flights" light />
-                <FeatureRow label="Villas & Luxury Homes" light />
-                <FeatureRow label="Reward Credits" light />
-                <FeatureRow label="Value Guarantee" light />
-                <FeatureRow
-                  label="Friends & Family Benefit Sharing"
-                  light
-                  filled
-                  icon="plus"
-                />
-              </ul>
+            {/* Platinum */}
+            <article className={planCardClass("platinum")}>
+              <h3 className="text-[32px] font-semibold leading-[40px] text-[#001F63] sm:text-[40px] sm:leading-[48px]">
+                Platinum
+              </h3>
+              <div
+                className="mt-4 flex flex-1 flex-col rounded-2xl p-5 text-white"
+                style={{
+                  backgroundImage: "url('/traveler/pricing-bg.png')",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
+                <p className="text-[18px] leading-[26px] text-white/95 sm:text-[20px] sm:leading-[28px]">
+                  Premium luxury travel experience with the best value.
+                </p>
+                <ul className="mt-5 space-y-3 text-[16px] leading-[24px] text-white sm:text-[18px] sm:leading-[26px]">
+                  <FeatureRow label="Hotels" light />
+                  <FeatureRow label="Cruises" light />
+                  <FeatureRow label="Car Rentals" light />
+                  <FeatureRow label="Flights" light />
+                  <FeatureRow label="Villas & Luxury Homes" light />
+                  <FeatureRow label="Reward Credits" light />
+                  <FeatureRow label="Value Guarantee" light />
+                  <FeatureRow
+                    label="Friends & Family Benefit Sharing"
+                    light
+                    filled
+                    icon="plus"
+                  />
+                </ul>
 
-              <div className="mt-auto pt-8">
-                <div className="rounded-2xl border border-white/35 bg-white/10 p-5 backdrop-blur-sm">
-                  <div className="flex items-end gap-2">
-                    <span className="text-[48px] leading-[56px] font-semibold text-white">$999</span>
-                    <span className="pb-2 text-[26px] leading-[34px] text-white/85 line-through">
-                      $1,199
-                    </span>
-                    <span className="pb-2 text-[20px] leading-[28px] text-white/90">/ year</span>
-                  </div>
-                  <Link
-                    href="/traveler/checkout?planId=2"
-                    className="mt-4 block w-full rounded-full bg-white py-3 text-center text-[22px] leading-[30px] font-medium text-[#2563EB] transition-colors hover:bg-[#EEF4FF]"
-                  >
-                    Get Started
-                  </Link>
-                  <div className="mt-3 flex items-center justify-center gap-2 text-[16px] leading-[24px] text-white">
-                    <ShieldIcon />
-                    <span>60 Days Money Back Guarantee</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          {/* Diamond */}
-          <article className="flex h-full flex-col rounded-2xl border border-[#D8E6FF] bg-white p-4">
-            <h3 className="text-[40px] leading-[48px] font-semibold text-[#001F63]">Diamond</h3>
-            <div className="mt-4 flex flex-1 flex-col rounded-2xl bg-[#F7FAFF] p-5">
-              <p className="text-[24px] leading-[32px] text-[#525253]">
-                Ultimate luxury travel experience with exclusive benefits
-              </p>
-              <ul className="mt-5 space-y-3 text-[20px] leading-[28px] text-[#3E424B]">
-                <FeatureRow label="Hotels" />
-                <FeatureRow label="Cruises" />
-                <FeatureRow label="Car Rentals" />
-                <FeatureRow label="Flights" />
-                <FeatureRow label="Villas & Luxury Homes" />
-                <FeatureRow label="Reward Credits" />
-                <FeatureRow label="Value Guarantee" />
-                <FeatureRow label="Friends & Family Benefit Sharing" icon="plus" />
-                <FeatureRow label="Approved Lux 24/7 Concierge" icon="plus" />
-                <FeatureRow label="Boomerang Rewards" icon="plus" />
-              </ul>
-
-              <div className="mt-auto pt-8">
-                <div className="rounded-2xl border border-[#E6EEFF] bg-white p-5">
-                  <div className="flex items-end gap-2">
-                    <span className="text-[48px] leading-[56px] font-semibold text-[#0E0E0F]">
-                      $1,499
-                    </span>
-                    <span className="pb-2 text-[26px] leading-[34px] text-[#7A7E87] line-through">
-                      $1699
-                    </span>
-                    <span className="pb-2 text-[20px] leading-[28px] text-[#525253]">
-                      / year
-                    </span>
-                  </div>
-                  <Link
-                    href="/traveler/checkout?planId=3"
-                    className="mt-4 block w-full rounded-full bg-[#001F63] py-3 text-center text-[22px] leading-[30px] font-medium text-white transition-colors hover:bg-[#00174B]"
-                  >
-                    Get Started
-                  </Link>
-                  <div className="mt-3 flex items-center justify-center gap-2 text-[16px] leading-[24px] text-[#525253]">
-                    <ShieldIcon />
-                    <span>60 Days Money Back Guarantee</span>
+                <div className="mt-auto pt-8">
+                  <div className="rounded-2xl border border-white/35 bg-white/10 p-5 backdrop-blur-sm">
+                    <div className="flex items-end gap-2">
+                      <span className="text-[40px] font-semibold leading-[48px] text-white sm:text-[48px] sm:leading-[56px]">
+                        $999
+                      </span>
+                      <span className="pb-2 text-[22px] leading-[30px] text-white/85 line-through sm:text-[26px] sm:leading-[34px]">
+                        $1,199
+                      </span>
+                      <span className="pb-2 text-[18px] leading-[26px] text-white/90 sm:text-[20px] sm:leading-[28px]">
+                        / year
+                      </span>
+                    </div>
+                    <Link
+                      href="/traveler/checkout?planId=5"
+                      className="mt-4 block w-full rounded-full bg-white py-3 text-center text-[20px] font-medium leading-[28px] text-[#2563EB] transition-colors hover:bg-[#EEF4FF] sm:text-[22px] sm:leading-[30px]"
+                    >
+                      Get Started
+                    </Link>
+                    <div className="mt-3 flex items-center justify-center gap-2 text-[14px] leading-[22px] text-white sm:text-[16px] sm:leading-[24px]">
+                      <ShieldIcon />
+                      <span>60 Days Money Back Guarantee</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </article>
+            </article>
+
+            {/* Diamond */}
+            <article className={planCardClass("diamond")}>
+              <h3 className="text-[32px] font-semibold leading-[40px] text-[#001F63] sm:text-[40px] sm:leading-[48px]">
+                Diamond
+              </h3>
+              <div className="mt-4 flex flex-1 flex-col rounded-2xl bg-[#F7FAFF] p-5">
+                <p className="text-[18px] leading-[26px] text-[#525253] sm:text-[20px] sm:leading-[28px]">
+                  Ultimate luxury travel experience with exclusive benefits
+                </p>
+                <ul className="mt-5 space-y-3 text-[16px] leading-[24px] text-[#3E424B] sm:text-[18px] sm:leading-[26px]">
+                  <FeatureRow label="Hotels" />
+                  <FeatureRow label="Cruises" />
+                  <FeatureRow label="Car Rentals" />
+                  <FeatureRow label="Flights" />
+                  <FeatureRow label="Villas & Luxury Homes" />
+                  <FeatureRow label="Reward Credits" />
+                  <FeatureRow label="Value Guarantee" />
+                  <FeatureRow label="Friends & Family Benefit Sharing" icon="plus" />
+                  <FeatureRow label="Approved Lux 24/7 Concierge" icon="plus" />
+                  <FeatureRow label="Boomerang Rewards" icon="plus" />
+                </ul>
+
+                <div className="mt-auto pt-8">
+                  <div className="rounded-2xl border border-[#E6EEFF] bg-white p-5">
+                    <div className="flex items-end gap-2">
+                      <span className="text-[38px] font-semibold leading-[48px] text-[#0E0E0F] sm:text-[45px] sm:leading-[56px]">
+                        $1,499
+                      </span>
+                      <span className="pb-2 text-[22px] leading-[30px] text-[#7A7E87] line-through sm:text-[26px] sm:leading-[34px]">
+                        $1699
+                      </span>
+                      <span className="pb-2 text-[16px] leading-[24px] text-[#525253] sm:text-[18px] sm:leading-[24px]">
+                        / year
+                      </span>
+                    </div>
+                    <Link
+                      href="/traveler/checkout?planId=6"
+                      className="mt-4 block w-full rounded-full bg-[#001F63] py-3 text-center text-[20px] font-medium leading-[28px] text-white transition-colors hover:bg-[#00174B] sm:text-[22px] sm:leading-[30px]"
+                    >
+                      Get Started
+                    </Link>
+                    <div className="mt-3 flex items-center justify-center gap-2 text-[14px] leading-[22px] text-[#525253] sm:text-[16px] sm:leading-[24px]">
+                      <ShieldIcon />
+                      <span>60 Days Money Back Guarantee</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </section>

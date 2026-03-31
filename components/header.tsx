@@ -243,7 +243,7 @@ export default function Header() {
   return (
     <>
       {/* <HolidayOfferBanner /> */}
-      <header className="left-0 w-full bg-white py-4 z-50">
+      <header className="left-0 w-full bg-white z-50">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex items-center justify-between">
             <Link href="/traveler" className="flex items-center">
@@ -374,7 +374,7 @@ export default function Header() {
                   mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
                 } transition-transform duration-300 ease-in-out z-50 max-lg:block lg:hidden`}
               >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="flex items-center justify-between">
                     <Link href="/traveler" className="flex items-center">
                       <Image

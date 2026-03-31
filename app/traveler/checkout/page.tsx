@@ -37,28 +37,14 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import ScrollToTop from "@/components/scroll-to-top"
 import CheckoutForm from "@/components/checkout-form"
-import { useGetMembershipPlansQuery } from "@/redux/services/api"
+import { travelerPricingData } from "@/data/travelerPricingData"
 import { useSearchParams } from "next/navigation"
 
 export default function CheckoutPage() {
   const searchParams = useSearchParams()
   const planId = searchParams.get('planId')
-  console.log("planIdddddddddddddd", planId);
-  const { data, isLoading } = useGetMembershipPlansQuery(undefined)
-  const datame = data?.data;
   
-  if (isLoading) return (
-    <div className="bg-white">
-      <Header />
-      <main className="min-h-screen flex items-center justify-center">
-        <p>Loading...</p>
-      </main>
-      <Footer />
-      <ScrollToTop />
-    </div>
-  )
-
-  const plan = datame?.find((p: any) => String(p.id) === String(planId))
+  const plan = travelerPricingData.find((p) => String(p.id) === String(planId))
   
   if (!planId || !plan) return (
     <div className="bg-white">
@@ -75,7 +61,15 @@ export default function CheckoutPage() {
     <div className="bg-white">
       <Header />
       <main>
-        <CheckoutForm plan={plan}/>
+        <CheckoutForm
+          plan={{
+            id: String(plan.id),
+            name: plan.name,
+            discountedPrice: plan.discountedPrice,
+            regularPrice: plan.regularPrice,
+            tierId: plan.id,
+          }}
+        />
       </main>
       <Footer />
       <ScrollToTop />

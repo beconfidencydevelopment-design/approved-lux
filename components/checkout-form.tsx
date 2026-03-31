@@ -48,6 +48,9 @@ const PLAN_TO_ARRIVIA_ACCOUNT_TYPE: Record<string, number> = {
   "1": 1,
   "2": 3,
   "3": 4,
+  "4": 1,
+  "5": 3,
+  "6": 4,
 };
 
 const usStates = [

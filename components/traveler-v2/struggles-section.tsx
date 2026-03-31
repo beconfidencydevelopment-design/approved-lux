@@ -55,10 +55,9 @@ export default function StrugglesSection() {
           <h1 className="font-semibold text-center text-[#001F63] text-[32px] leading-[40px] lg:text-[48px]">
           Travelers Often Overpay For Trips.
           </h1>
-          <p className="text-[#525253] text-lg lg:text-xl text-center">
-            When you book travel through public platforms like Expedia
-            <br />
-            or Hotels.com, you are seeing retail pricing.
+          <p className="mx-auto max-w-xl text-balance text-center text-lg text-[#525253] lg:max-w-2xl lg:text-xl">
+            When you book travel through public platforms like Expedia or
+            Hotels.com, you are seeing retail pricing.
           </p>
         </div>
 
